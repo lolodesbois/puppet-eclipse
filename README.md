@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Eclipse module for Puppet #
 
 This module installs Eclipse.
@@ -82,3 +83,6 @@ Install a third-party plugin using *p2_director*
 - eclipse::plugin::web
 - eclipse::set::helpers
 - eclipse::set::php
+=======
+# puppet-eclipse
+>>>>>>> 5510429eb20623fdec24314bb9228785a1e58999
