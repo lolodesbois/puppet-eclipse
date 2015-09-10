@@ -6,4 +6,6 @@ license 'MIT'
 summary 'Install Eclipse'
 description 'Install Eclipse with plugins'
 project_page 'https://github.com/mjanser/puppet-eclipse.git'
-dependency 'gini/archive', '>= 0.2.0'
+
+dependency 'nanliu/archive', '>= 0.3.0'
+dependency 'puppetlabs/stdlib', '>= 2.6.0'

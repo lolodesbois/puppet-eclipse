@@ -44,11 +44,12 @@ class eclipse::install::download (
     }
   }
 
-  archive { $filename:
-    ensure   => $ensure,
-    source   => $url,
-    extract_path => "${eclipse::params::target_dir}/eclipse", #default to /opt
-    
+  archive { "${eclipse::params::target_dir}/eclipse/${filename}":
+    ensure       => $ensure,
+    source       => $url,
+    extract      => true,
+    extract_path => "${eclipse::params::target_dir}/eclipse/" #default to /opt
+    #creates      => true
     #url      => $url,
     #target   => $eclipse::params::target_dir,
     #root_dir => 'eclipse', 
@@ -59,7 +60,7 @@ class eclipse::install::download (
     ensure  => $ensure,
     content => template('eclipse/opt-eclipse.desktop.erb'),
     mode    => "644",
-    require => Archive[$filename]
+    require => Archive["${eclipse::params::target_dir}/eclipse/${filename}"]
   }
 
 }
