@@ -23,8 +23,11 @@ class eclipse::install::download (
     default          => "-${::architecture}"
   }
 
-  $filename = "eclipse-${package}-${release_name}-${service_release}-linux-gtk${archsuffix}"
-  $url = "${mirror}/eclipse/technology/epp/downloads/release/${release_name}/${service_release}/${filename}.tar.gz"
+#  $filename = "eclipse-${package}-${release_name}-${service_release}-linux-gtk${archsuffix}"
+#  $url = "${mirror}/eclipse/technology/epp/downloads/release/${release_name}/${service_release}/${filename}.tar.gz"
+
+  $filename = "eclipse-jee-mars-R-linux-gtk-x86_64"
+  $url = "file:////home/pictimedt/Dev/${filename}.tar.gz"
 
   if $owner_group and $ensure == 'present' {
     exec { 'eclipse ownership':
@@ -44,12 +47,14 @@ class eclipse::install::download (
     }
   }
 
-  archive { "${eclipse::params::target_dir}/eclipse/${filename}":
+#  archive { "${eclipse::params::target_dir}/eclipse/":
+  archive { "/tmp/${filename}.tar.gz":
     ensure       => $ensure,
     source       => $url,
     extract      => true,
-    extract_path => "${eclipse::params::target_dir}/eclipse/" #default to /opt
-    #creates      => true
+    extract_path => "${eclipse::params::target_dir}", #default to /opt/
+    creates      => "${eclipse::params::target_dir}/eclipse",
+    cleanup      => true
     #url      => $url,
     #target   => $eclipse::params::target_dir,
     #root_dir => 'eclipse', 
@@ -60,7 +65,8 @@ class eclipse::install::download (
     ensure  => $ensure,
     content => template('eclipse/opt-eclipse.desktop.erb'),
     mode    => "644",
-    require => Archive["${eclipse::params::target_dir}/eclipse/${filename}"]
+#    require => Archive["${eclipse::params::target_dir}/eclipse/"]
+    require => Archive["/tmp/${filename}.tar.gz"]
   }
 
 }
