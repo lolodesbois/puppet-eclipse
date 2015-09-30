@@ -23,11 +23,8 @@ class eclipse::install::download (
     default          => "-${::architecture}"
   }
 
-#  $filename = "eclipse-${package}-${release_name}-${service_release}-linux-gtk${archsuffix}"
-#  $url = "${mirror}/eclipse/technology/epp/downloads/release/${release_name}/${service_release}/${filename}.tar.gz"
-
-  $filename = "eclipse-jee-mars-R-linux-gtk-x86_64"
-  $url = "file:////home/pictimedt/Dev/${filename}.tar.gz"
+  $filename = "eclipse-${package}-${release_name}-${service_release}-linux-gtk${archsuffix}"
+  $url = "${mirror}/eclipse/technology/epp/downloads/release/${release_name}/${service_release}/${filename}.tar.gz"
 
   if $owner_group and $ensure == 'present' {
     exec { 'eclipse ownership':

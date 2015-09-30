@@ -15,6 +15,7 @@ class eclipse::params {
   }
 
   $target_dir = '/opt'
+#  $target_dir = "/opt/"
   $download_bin = "${target_dir}/eclipse/eclipse"
 
 }
